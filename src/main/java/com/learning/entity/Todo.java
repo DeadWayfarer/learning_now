@@ -1,11 +1,7 @@
 package com.learning.entity;
 
 
-import java.util.*;
-
 public class Todo {
-    private static final long serialVersionUID = 1L;
-
     private int todoId;
     public int userId;
     private String name;

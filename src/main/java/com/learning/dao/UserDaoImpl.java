@@ -6,16 +6,13 @@ import com.learning.util.paginated.PaginatedListHelper;
 import com.learning.util.paginated.SimplePaginatedList;
 import com.learning.web.user.UsersForm;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository("userDao")
@@ -45,7 +42,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             sql2.append(form.getPageSize());
         }
 
-        List list = getJdbcTemplate().query(sql2.toString(), new UserMapper());
+        List<User> list = getJdbcTemplate().query(sql2.toString(), new UserMapper());
         if (total == -1)
             total = list.size();
         return PaginatedListHelper.getPaginatedList(list, total, form);
@@ -54,7 +51,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     public User getUserByUserId(Integer userId) {
         UserMapper usermapper = new UserMapper();
         String sql = "select * from users where user_id = ?";
-        List list = getJdbcTemplate().query(sql, usermapper, new Object[]{userId});
+        List<User> list = getJdbcTemplate().query(sql, usermapper, new Object[]{userId});
         if (list.isEmpty()){
             return null;
         }else {
@@ -65,7 +62,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     public User getUserByEmail(String email){
         UserMapper usermapper = new UserMapper();
         String sql = "select * from users where email = ?";
-        List list = getJdbcTemplate().query(sql, usermapper, new Object[]{email});
+        List<User> list = getJdbcTemplate().query(sql, usermapper, new Object[]{email});
         if (list.isEmpty())
             return null;
         else
@@ -127,7 +124,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
         String sql = "select * from users where username = ?";
         User user;
-        List list = getJdbcTemplate().query(sql, new UserMapper(), new Object[]{username});
+        List<User> list = getJdbcTemplate().query(sql, new UserMapper(), new Object[]{username});
         if (list.isEmpty()){
             user = null;
         }else {

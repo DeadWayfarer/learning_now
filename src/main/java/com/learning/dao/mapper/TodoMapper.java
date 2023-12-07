@@ -1,7 +1,6 @@
 package com.learning.dao.mapper;
 
 import com.learning.entity.Todo;
-import com.learning.entity.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

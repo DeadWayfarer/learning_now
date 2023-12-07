@@ -1,11 +1,8 @@
 package com.learning.web.todo;
 
-import com.learning.dao.TodoDao;
-import com.learning.dao.UserDao;
 import com.learning.entity.Todo;
 import com.learning.entity.User;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -17,7 +14,6 @@ import org.springframework.validation.Validator;
  */
 @Repository("todoEditValidator")
 public class TodoEditValidator implements Validator {
-    @Autowired private TodoDao todoDao;
 
     @Override
     public boolean supports(Class<?> aClass) {

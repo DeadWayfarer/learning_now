@@ -1,7 +1,6 @@
 package com.learning.web.todo;
 
 import com.learning.dao.TodoDao;
-import com.learning.dao.UserDao;
 import com.learning.entity.Todo;
 import com.learning.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

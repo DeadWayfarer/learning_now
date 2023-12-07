@@ -1,13 +1,10 @@
 package com.learning.web.todo;
 
 import com.learning.dao.TodoDao;
-import com.learning.dao.UserDao;
 import com.learning.entity.Todo;
 import com.learning.entity.User;
 import com.learning.util.paginated.PaginatedListHelper;
 import com.learning.util.paginated.SimplePaginatedList;
-import com.learning.web.user.UsersForm;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

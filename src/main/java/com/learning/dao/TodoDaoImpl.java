@@ -1,24 +1,13 @@
 package com.learning.dao;
 
-import com.learning.dao.mapper.TodoMapper;
-import com.learning.dao.mapper.UserMapper;
-import com.learning.entity.Todo;
-import com.learning.entity.User;
-import com.learning.util.paginated.PaginatedListHelper;
-import com.learning.util.paginated.SimplePaginatedList;
-import com.learning.web.user.UsersForm;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
+import com.learning.dao.mapper.TodoMapper;
+import com.learning.entity.Todo;
+import com.learning.entity.User;
 
 @Repository("todoDao")
 public class TodoDaoImpl extends BaseDaoImpl implements TodoDao {
