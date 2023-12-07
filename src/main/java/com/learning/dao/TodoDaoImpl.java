@@ -29,16 +29,20 @@ public class TodoDaoImpl extends BaseDaoImpl implements TodoDao {
     private final String SQL_UPDATE_TEMPLATE = "update todo set user_id = %s, name = '%s', deleted = %s, checked = %s where todo_id = %s";
     private final String SQL_DELETE_TEMPLATE = "update todo set deleted = 1 where todo_id = %s";
 
-    public Integer getTodoCountOfUser(User user) {
+    public Integer getTodoCountOfUser(User user, String nameFilter) {
         int userId = user.getUserId();
         String sql = SQL_COUNT_TEMPLATE + " and user_id = " + userId;
+        if (StringUtils.isNotBlank(nameFilter))
+            sql += " and name like '%"+nameFilter+"%' ";
         return getJdbcTemplate()
             .queryForObject(sql, Integer.class);
     }
 
-    public List<Todo> getTodosOfUser(User user, int skip, int limit) {
+    public List<Todo> getTodosOfUser(User user, int skip, int limit, String nameFilter) {
         int userId = user.getUserId();
         String sql = SQL_SELECT_TEMPLATE + " and user_id = " + userId;
+        if (StringUtils.isNotBlank(nameFilter))
+            sql += " and name like '%"+nameFilter+"%' ";
         sql += " limit " + skip + ", " + limit;
         return getJdbcTemplate()
             .query(sql, new TodoMapper());

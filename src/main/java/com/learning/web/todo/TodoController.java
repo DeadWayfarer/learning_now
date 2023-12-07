@@ -46,11 +46,11 @@ public class TodoController {
         if (command.getPage() <= 0) {
             command.setPage(1);
         }
-        int totalCount = todoDao.getTodoCountOfUser(user);
+        int totalCount = todoDao.getTodoCountOfUser(user, command.getTodoNameFilter());
         int startOffset = (command.getPage() - 1) * command.getPageSize();
         int endOffset = startOffset + command.getPageSize();
 
-        List<Todo> list = todoDao.getTodosOfUser(user, startOffset, endOffset);
+        List<Todo> list = todoDao.getTodosOfUser(user, startOffset, endOffset, command.getTodoNameFilter());
         SimplePaginatedList paginatedList = PaginatedListHelper.getPaginatedList(list, totalCount, command);;
         model.addAttribute("list", paginatedList);
         model.addAttribute("command", command);
