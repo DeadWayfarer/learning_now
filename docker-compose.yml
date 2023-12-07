@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web:
+    image: learning-new
+    build: .
+    ports:
+      - "8000:8080"
+    networks:
+      - mysql
+
+networks:
+  mysql:
+    name: "mysql-bridge"
+    external: "true"
+
+#docker run -p 3306:3306 -it --network mysql-bridge --name mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.2
