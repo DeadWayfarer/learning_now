@@ -37,9 +37,15 @@ public class TodoController {
     ){
         User user = new User();
         user.setUserId(1);
-
+        
+        if (command.getPage() <= 0) {
+            command.setPage(1);
+        }
         int totalCount = todoDao.getTodoCountOfUser(user);
-        List<Todo> list = todoDao.getTodosOfUser(user, command.getFirstResult(), command.getPageSize());
+        int startOffset = (command.getPage() - 1) * command.getPageSize();
+        int endOffset = startOffset + command.getPageSize();
+
+        List<Todo> list = todoDao.getTodosOfUser(user, startOffset, endOffset);
         SimplePaginatedList paginatedList = PaginatedListHelper.getPaginatedList(list, totalCount, command);;
         model.addAttribute("list", paginatedList);
         model.addAttribute("command", command);
@@ -47,11 +53,20 @@ public class TodoController {
     }
 
     @RequestMapping("/todo/todoDelete.html")
-    public String delUser(@RequestParam(required = false) Integer todoId){
+    public String delTodo(@RequestParam(required = false) Integer todoId){
         if (todoId!=null){
             todoDao.delete(todoId);
         }
-        return "redirect:/todo/todoDelete.html";
+        return "redirect:/todo/todos.html";
     }
 
+    @RequestMapping("/todo/todoCheck.html") 
+    public String checkTodo(@RequestParam(required = false) Integer todoId){
+        Todo todo = todoDao.getTodoById(todoId);
+        if (todo!=null){
+            todo.setChecked(!todo.isChecked());
+            todoDao.saveOrUpdate(todo);
+        }
+        return "redirect:/todo/todos.html";
+    }
 }

@@ -56,7 +56,7 @@ public class TodoDaoImpl extends BaseDaoImpl implements TodoDao {
         if (todo.getTodoId() == 0) {
             sql = String.format(SQL_INSERT_TEMPLATE, todo.getUserId(), todo.getName(), todo.isDeleted(), todo.isChecked());
         } else {
-            sql = String.format(SQL_UPDATE_TEMPLATE, todo.getTodoId(), todo.getUserId(), todo.getName(), todo.isDeleted(), todo.isChecked());
+            sql = String.format(SQL_UPDATE_TEMPLATE, todo.getUserId(), todo.getName(), todo.isDeleted(), todo.isChecked(), todo.getTodoId());
         }
          
         getJdbcTemplate()
