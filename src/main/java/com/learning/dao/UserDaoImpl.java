@@ -25,7 +25,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         String sql = "select count(distinct u.user_id) from users u";
         String filt = "";
         if (StringUtils.isNotBlank(form.getUsername()))
-            filt += " where u.username LIKE '%" + form.getUsername() + "'%";
+            filt += " where u.username LIKE '%" + form.getUsername() + "%'";
         sql = sql + filt;
         int total = -1;
         if (form.getPageSize() != -1) {
