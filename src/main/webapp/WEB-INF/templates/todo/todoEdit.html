@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/default">
+    <head>
+        <title>Редактирование задачи</title>
+    </head>
+    <div layout:fragment="content">
+        <div class="col-sm-12">
+        <form action="#" th:action="@{/todo/todoEdit.html}" th:object="${command}" method="post" class="form-horizontal">
+            <input type="hidden" th:field="*{todoId}" />
+            <input type="hidden" th:field="*{userId}" />
+
+            <div class="panel panel-default">
+                <div class="panel-heading initialism">
+                    Редактирование задачи
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Название задачи:
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'fieldError form-control' : 'form-control'" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <input class="btn btn-primary" type="submit" value="Сохранить" name="_save"/>
+                            <input class="btn btn-primary" type="submit" value="Отменить" name="_cancel"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>  
+</html>
