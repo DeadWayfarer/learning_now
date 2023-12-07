@@ -23,18 +23,28 @@ import java.util.List;
 @Repository("todoDao")
 public class TodoDaoImpl extends BaseDaoImpl implements TodoDao {
 
+    private final String SQL_COUNT_TEMPLATE = "select count(todo_id) from todo where deleted = 1";
+    private final String SQL_SELECT_TEMPLATE = "select * from todo where deleted = 1";
     private final String SQL_INSERT_TEMPLATE = "insert into todo (user_id, name, deleted, checked) values (%s,'%s',%s,%s)";
     private final String SQL_UPDATE_TEMPLATE = "update todo set user_id = %s, name = '%s', deleted = %s, checked = %s where todo_id = %s";
 
-    public List<Todo> getTodosOfUser(User user) {
+    public Integer getTodoCountOfUser(User user) {
         int userId = user.getUserId();
-        String sql = "select * from todo where deleted = 1 and user_id = " + userId;
+        String sql = SQL_COUNT_TEMPLATE + " and user_id = " + userId;
+        return getJdbcTemplate()
+            .queryForObject(sql, Integer.class);
+    }
+
+    public List<Todo> getTodosOfUser(User user, int skip, int limit) {
+        int userId = user.getUserId();
+        String sql = SQL_SELECT_TEMPLATE + " and user_id = " + userId;
+        sql += " limit " + skip + ", " + limit;
         return getJdbcTemplate()
             .query(sql, new TodoMapper());
     }
 
     public Todo getTodoById(Integer todoId) {
-        String sql = "select * from todo where deleted = 1 and todo_id = " + todoId;
+        String sql = SQL_SELECT_TEMPLATE + " and todo_id = " + todoId;
         Todo todo = getJdbcTemplate()
             .queryForObject(sql, new TodoMapper());
         return todo;

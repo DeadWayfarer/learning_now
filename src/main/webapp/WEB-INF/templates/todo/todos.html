@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/default">
+    <head>
+        <title>Список задач</title>
+    </head>
+    <div layout:fragment="content">
+        <script>
+            //<![CDATA[
+            $(document).ready(function() {
+                $('input[name="_clear"]').click(function(){
+                    $('input[type="text"]').val('');
+                    $('select').val('');
+                });
+            });
+            //]]>
+        </script>
+        <div class="col-sm-12">
+            <form action="#" th:action="@{/todo/todos.html}" th:object="${command}" method="post" class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading initialism">
+                        Поиск задач
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                Название задачи:
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" th:field="*{todoName}" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <input class="btn btn-primary btn-sm"  type="submit" value="Поиск"/>
+                            <input class="btn btn-primary btn-sm"  type="submit" value="Очистить" name="_clear"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <div th:include='layouts/pagination :: paginationbar' ></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="action-button">
+                            <!--
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeEdit.html"
+                                th:href="@{'/user/userEdit.html?userId='}"><i sec:authorize="hasRole('ROLE_ADMIN')" class="fa fa-plus-circle" aria-hidden="true" title="Добавить новый магазин"></i></a>
+                            -->
+                        </th>
+                        <th>Имя пользователя</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="todo : ${list.list}">
+                        <td >
+                            <!--
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeEdit.html"
+                                th:href="@{'/user/userEdit.html?userId=' + ${user.userId}}"><i class='fa fa-pencil' aria-hidden='true' title="Редактировать"></i></a>
+                                
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeDelete.html"
+                                th:href="@{'/user/userDelete.html?userId=' + ${user.userId}}"><i class='fa fa-remove' aria-hidden='true' title="Удалить"></i></a>
+                            -->
+                        </td>
+                        <td th:text="${todo.name}">name</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:include='layouts/pagination :: paginationbar' ></div>
+        </div>
+    </div>
+</html>
