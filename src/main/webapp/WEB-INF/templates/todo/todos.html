@@ -52,7 +52,7 @@
                                 th:href="@{'/user/userEdit.html?userId='}"><i sec:authorize="hasRole('ROLE_ADMIN')" class="fa fa-plus-circle" aria-hidden="true" title="Добавить новый магазин"></i></a>
                             -->
                         </th>
-                        <th>Имя пользователя</th>
+                        <th>Название задачи</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,10 +61,13 @@
                             <!--
                                 <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeEdit.html"
                                 th:href="@{'/user/userEdit.html?userId=' + ${user.userId}}"><i class='fa fa-pencil' aria-hidden='true' title="Редактировать"></i></a>
-                                
-                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeDelete.html"
-                                th:href="@{'/user/userDelete.html?userId=' + ${user.userId}}"><i class='fa fa-remove' aria-hidden='true' title="Удалить"></i></a>
                             -->
+                            <a  href="/todo/todoDelete.html"
+                            th:href="@{'/todo/todoDelete.html?todoId=' + ${todo.todoId}}"><i class='fa fa-remove' aria-hidden='true' title="Удалить"></i></a>
+                            
+                            <a>
+                                <input type="checkbox" th:checked="${todo.checked}"/>
+                            </a>
                         </td>
                         <td th:text="${todo.name}">name</td>
                     </tr>
