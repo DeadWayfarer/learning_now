@@ -20,7 +20,7 @@
                   <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/users.html">Пользователи</a></li>
             </ul>
             <ul class="nav navbar-nav">
-                  <li><a href="/todo/todos.html">Задачи</a></li>
+                  <li><a sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" href="/todo/todos.html">Задачи</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

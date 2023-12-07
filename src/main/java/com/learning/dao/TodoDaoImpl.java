@@ -45,6 +45,8 @@ public class TodoDaoImpl extends BaseDaoImpl implements TodoDao {
     }
 
     public Todo getTodoById(Integer todoId) {
+        if (todoId == null || todoId == 0)
+            return null;
         String sql = SQL_SELECT_TEMPLATE + " and todo_id = " + todoId;
         Todo todo = getJdbcTemplate()
             .queryForObject(sql, new TodoMapper());

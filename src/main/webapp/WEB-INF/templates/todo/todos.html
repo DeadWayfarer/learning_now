@@ -47,10 +47,9 @@
                 <thead>
                     <tr>
                         <th class="action-button">
-                            <!--
-                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeEdit.html"
-                                th:href="@{'/user/userEdit.html?userId='}"><i sec:authorize="hasRole('ROLE_ADMIN')" class="fa fa-plus-circle" aria-hidden="true" title="Добавить новый магазин"></i></a>
-                            -->
+                            <a href="/todo/todoEdit.html" th:href="@{'/todo/todoEdit.html?todoId='}">
+                                <i class="fa fa-plus-circle" aria-hidden="true" title="Добавить задачу"></i>
+                            </a>
                         </th>
                         <th></th>
                         <th>Название задачи</th>
@@ -61,10 +60,8 @@
                         <td >
                             <a  href="/todo/todoDelete.html"
                             th:href="@{'/todo/todoDelete.html?todoId=' + ${todo.todoId}}"><i class='fa fa-remove' aria-hidden='true' title="Удалить"></i></a>
-                            <!--
-                                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/storeEdit.html"
-                                th:href="@{'/user/userEdit.html?userId=' + ${user.userId}}"><i class='fa fa-pencil' aria-hidden='true' title="Редактировать"></i></a>
-                            -->
+                            <a href="/todo/todoEdit.html"
+                            th:href="@{'/todo/todoEdit.html?todoId=' + ${todo.todoId}}"><i class='fa fa-pencil' aria-hidden='true' title="Редактировать"></i></a>
                         </td>
                         <td>
                             <a class="checkbox-rect" href="/todo/todoCheck.html" th:href="@{'/todo/todoCheck.html?todoId=' + ${todo.todoId}}">

@@ -11,6 +11,7 @@ import com.learning.web.user.UsersForm;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,12 @@ public class TodoController {
             Model model,
             @ModelAttribute("TodoController.command") TodoForm command
     ){
-        User user = new User();
-        user.setUserId(1);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user;
+        if (principal instanceof User)
+            user = (User)principal;
+        else
+            return "redirect:/login.html";
         
         if (command.getPage() <= 0) {
             command.setPage(1);
